@@ -1,0 +1,165 @@
+<?html
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="icon" href="images/ping.png" type="image/icon type" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="css/jquery.timepicker.css" />
+    <link rel="stylesheet" href="css/flaticon.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Login</title>
+    <style> </style>
+    <div
+  class="hero-wrap js-fullheight"
+  style="
+    background-image: url('images/banner.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  "
+>
+  </head>
+
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light"
+      id="ftco-navbar"
+      style="margin-bottom: 10px"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand"
+          href="index.html"
+          style="
+            background: linear-gradient(-45deg, #ffa407 0%, #ff0000 100%);
+            -webkit-background-clip: text;
+            color: transparent !important;
+          "
+          ><span style="color: #ffffff">MARVEL </span>NEX</a
+        >
+      </div>
+    </nav>
+    <br />
+    <section
+      class="ftco-section-2"
+      style="
+        background-color: rgba(0, 0, 0, 0.6);
+        margin-top: 100px;
+        margin-left: 500px;
+        width: 470px;
+        height: 500px;
+        border-radius: 35px;
+      "
+    >
+      <div class="container-2" style="background-color: transparent !important">
+        <div class="col-md-5" style="background-color: transparent !important">
+          <div
+            class="login-wrap-2 p-4"
+            style="
+              background: transparent;
+              width: 500px;
+              margin-left: 15px;
+              margin-top: 50px;
+            "
+          >
+            <!-- <?html
+                    include("config.html");
+                    if (isset($_POST['submit'])) {
+                        $email = mysqli_real_escape_string($con, $_POST['email']);
+                        $password = mysqli_real_escape_string($con, $_POST['password']);
+                        $result = mysqli_query($con, "SELECT * FROM users WHERE Email='$email' AND Password='$password' ") or die("Select Error");
+                        $row = mysqli_fetch_assoc($result);
+                        if (is_array($row) && !empty($row)) {
+                            $_SESSION['valid'] = $row['Email'];
+                            $_SESSION['username'] = $row['Username'];
+                            $_SESSION['age'] = $row['Age'];
+                            $_SESSION['id'] = $row['Id'];
+                        } else {
+                            $alertMessage = "Wrong Email or Username!.";
+                            echo "<script>alert('$alertMessage');</script>";
+                            echo "<script>window.location.href='http://localhost/project/index.html';</script>";
+                        }
+                        if (isset($_SESSION['valid'])) {
+                            header("Location: course.html");
+                        }
+                    } else {
+                    ?> -->
+
+            <h2 style="color: #ff0000 !important; margin-top: 45px">Log In</h2>
+            <br />
+            <form action="course.html" class="signup-form" method="post">
+              <div class="form-group">
+                <label class="label" for="email" style="color: #ffffff"
+                  >Email Address</label
+                >
+                <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  class="form-control"
+                  placeholder="tony@gmail.com"
+                  style="
+                    border-radius: 25px !important;
+                    height: 50px;
+                    width: 350px;
+                  "
+                />
+              </div>
+              <div class="form-group">
+                <label class="label" for="password" style="color: #ffffff"
+                  >Password</label
+                >
+                <input
+                  name="password"
+                  id="password"
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  style="
+                    border-radius: 25px !important;
+                    height: 50px;
+                    width: 350px;
+                  "
+                />
+              </div>
+              <div class="form-group mt-4">
+                <button
+                  type="submit"
+                  name="submit"
+                  class="btn btn-primary submit"
+                  value="Submit"
+                  style="height: 50px; width: 350px; border-radius: 3.75em"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+            <p class="text-center" style="margin-right: 110px">
+              Did'nt have an account? <a href="index.html">Sign up</a>
+            </p>
+
+            <!-- <?html } ?> -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

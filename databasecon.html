@@ -1,0 +1,24 @@
+<?html 
+    include("config.html");
+    if(isset($_POST['submit'])){        
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password']; 
+        $Confirmpassword = $_POST['confirm-password-field']; 
+        $verify_query = mysqli_query($con,"SELECT Email FROM users WHERE Email='$email'");
+        if(mysqli_num_rows($verify_query) != 0){
+            $alertMessage = "This email is used. Try another one, please!";
+            echo "<script>alert('$alertMessage');</script>";
+        }
+        else{
+            mysqli_query($con,"INSERT INTO users (Username,Email,Password,ConPassword) VALUES('$username','$email','$password','$Confirmpassword')") or die("Error Occurred");
+            $alertMessage = "Registeration Successful.";
+            echo "<script>alert('$alertMessage');</script>";
+            echo "<script>window.location.href='http://localhost/project/signin.html';</script>"; 
+        }
+    }
+    else{
+        $alertMessage = "Registeration Declined!.";
+        echo "<script>alert('$alertMessage');</script>";
+    } 
+?>

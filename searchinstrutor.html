@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Marvel Nex - Free Bootstrap 4 Template by Colorlib</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/animate.css" />
+  <link rel="icon" href="images/ping.png" type="image/icon type">
+  <link rel="stylesheet" href="css/owl.carousel.min.css" />
+  <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+  <link rel="stylesheet" href="css/magnific-popup.css" />
+  <link rel="stylesheet" href="css/bootstrap-datepicker.css" />
+  <link rel="stylesheet" href="css/jquery.timepicker.css" />
+  <link rel="stylesheet" href="css/flaticon.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html" style="color:rgb(255, 10, 10)"><span style="color: #ffff">
+        </span>MARVEL NEX</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="course.html" class="nav-link">Course</a>
+          </li>
+          <li class="nav-item active">
+            <a href="instructor.html" class="nav-link">Instructor</a>
+          </li>
+          <li class="nav-item">
+            <a href="blog.html" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_10.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-end justify-content-center">
+        <div class="col-md-9 ftco-animate pb-5 text-center">
+          <p class="breadcrumbs">
+            <span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span>
+            <span>Certified Instructor <i class="fa fa-chevron-right"></i></span>
+          </p>
+          <h1 class="mb-0 bread">Certified Instructor</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="ftco-section" style="background-color: #d2d2d2;">
+    <div class="container">
+      <form action="searchinstrutor.html" method="GET" class="search-form" style="margin-bottom:10px;">
+        <div class="form-group" style="display: inline-block;">
+          <input type="text" name="search" id="search" class="form-control" placeholder="Search..."
+            style="width: 830px;height: 45px;">
+        </div>
+        <div style="display: inline-block; vertical-align: top;">
+          <button type="submit" name="submit" class="btn btn-primary submit"
+            style="width: 275px; height: 45px;">Submit</button>
+        </div>
+      </form>
+
+      <div class="row">
+        <?html
+        include("config.html");
+
+        $conn = new mysqli($servername, $username, $password, $database);
+
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+
+        if (isset($_GET['submit'])) {
+          $search = $_GET['search'];
+
+
+          // Perform the search query with prepared statements
+          $sql = "SELECT instructor_name, position, descrip, image_url FROM instructors WHERE Tag1 LIKE ? OR Tag2 LIKE ? OR Tag3 LIKE ?";
+
+          $stmt = $conn->prepare($sql);
+          $searchParam = "%$search%";
+          $stmt->bind_param("sss", $searchParam, $searchParam, $searchParam);
+          $stmt->execute();
+
+          $result = $stmt->get_result();
+
+          if ($result !== false) {
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                // Process and display the result set
+                ?>
+
+                <div class="col-md-6 col-lg-3 ftco-animate d-flex align-items-stretch">
+                  <div class="staff">
+                    <div class="img-wrap d-flex">
+                      <div class="img align-self-stretch" style="background-image: url('<?html echo $row['image_url']; ?>')">
+                      </div>
+                    </div>
+                    <div class="text pt-3">
+                      <h3><a href="instructor-details.html">
+                          <?html echo $row['instructor_name']; ?>
+                        </a></h3>
+                      <span class="position mb-2">
+                        <?html echo $row['position']; ?>
+                      </span>
+                      <div class="faded">
+                        <p>
+                          <?html echo $row['descrip']; ?>
+                        </p>
+                        <ul class="ftco-social text-center">
+                          <li class="ftco-animate">
+                            <a href="#"><span class="fa fa-twitter"></span></a>
+                          </li>
+                          <li class="ftco-animate">
+                            <a href="#"><span class="fa fa-facebook"></span></a>
+                          </li>
+                          <li class="ftco-animate">
+                            <a href="#"><span class="fa fa-google"></span></a>
+                          </li>
+                          <li class="ftco-animate">
+                            <a href="#"><span class="fa fa-instagram"></span></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <?html
+              }
+            } else {
+              echo "No results found.";
+            }
+          } else {
+            echo "Error executing the query: " . $stmt->error;
+          }
+
+          // Close the prepared statement
+          $stmt->close();
+        }
+
+        // Close the database connection
+        $conn->close();
+        ?>
+      </div>
+
+    </div>
+    </div>
+  </section>
+  <footer class="ftco-footer ftco-no-pt">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md pt-5">
+          <div class="ftco-footer-widget pt-md-5 mb-4">
+            <h2 class="ftco-heading-2">About</h2>
+            <p>
+              Explore the Marvel Nex universe, inspired by Marvel's cosmos. Unleash your unique potential in our
+              transformative project.
+            </p>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+              <li class="ftco-animate">
+                <a href="#"><span class="fa fa-twitter"></span></a>
+              </li>
+              <li class="ftco-animate">
+                <a href="#"><span class="fa fa-facebook"></span></a>
+              </li>
+              <li class="ftco-animate">
+                <a href="#"><span class="fa fa-instagram"></span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md pt-5">
+          <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
+            <h2 class="ftco-heading-2">Help Desk</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="py-2 d-block">Customer Care</a></li>
+              <li><a href="#" class="py-2 d-block">Legal Help</a></li>
+              <li><a href="#" class="py-2 d-block">Services</a></li>
+              <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+              <li><a href="#" class="py-2 d-block">Refund Policy</a></li>
+              <li><a href="#" class="py-2 d-block">Call Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md pt-5">
+          <div class="ftco-footer-widget pt-md-5 mb-4">
+            <h2 class="ftco-heading-2">Recent Courses</h2>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="py-2 d-block">Mutants</a>
+              </li>
+              <li><a href="#" class="py-2 d-block">Tech</a></li>
+              <li><a href="#" class="py-2 d-block">Mythology</a></li>
+              <li><a href="#" class="py-2 d-block">Heroes
+                </a></li>
+              <li>
+                <a href="#" class="py-2 d-block">Trickery</a>
+              </li>
+              <li><a href="#" class="py-2 d-block">Innovation</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md pt-5">
+          <div class="ftco-footer-widget pt-md-5 mb-4">
+            <h2 class="ftco-heading-2">Have a Questions?</h2>
+            <div class="block-23 mb-3">
+              <ul>
+                <li>
+                  <span class="icon fa fa-map-marker"></span><span class="text">STARK Mansion, Malibu, California,
+                    USA</span>
+                </li>
+                <li>
+                  <a href="#"><span class="icon fa fa-phone"></span><span class="text">J.A.R.V.I.S</span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon fa fa-paper-plane"></span><span
+                      class="text">marvel@jarvis.co.in</span></a>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+            Copyright &copy;
+            <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            All rights reserved | Made By
+            <a href="https://bipinchowdary.github.io" target="_blank"
+              >Bipin Chowdary</a
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        stroke="#F96D00" />
+    </svg>
+  </div>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "UA-23581568-13");
+  </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
+    integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
+    data-cf-beacon='{"rayId":"82261863ea674832","version":"2023.10.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

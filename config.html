@@ -1,0 +1,13 @@
+<?html
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "facultydirectory";
+
+// Create connection
+$con = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($con->connect_error) { die("Connection failed: " . $con->connect_error); }
+// Set UTF-8 character set to avoid potential character encoding issues
+$con->set_charset("utf8"); ?>
